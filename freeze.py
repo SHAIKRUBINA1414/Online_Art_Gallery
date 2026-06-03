@@ -14,6 +14,10 @@ if __name__ == "__main__":
         ensure_database_shape()
         create_sample_artworks()
 
+    # Flask 3 removed app.url_map.charset, but Frozen-Flask still expects it.
+    if not hasattr(app.url_map, "charset"):
+        app.url_map.charset = "utf-8"
+
     freezer = Freezer(app)
     freezer.freeze()
     print("Static site generated in './build' directory")

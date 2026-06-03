@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ru's Art Vault — a curated pastel art gallery with creative games, digital art experiences, and more.">
+  <title>Art Puzzle | Ru's Art Vault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+  
+</head>
+<body>
+  <!-- Skip navigation link for keyboard users -->
+  <a class="skip-nav" href="#main-content">Skip to main content</a>
+
+  <div class="heart-trail-layer" id="heartTrailLayer" aria-hidden="true"></div>
+
+  <header>
+    <nav class="navbar navbar-expand-lg sticky-top" aria-label="Main navigation">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="/" aria-label="Ru's Art Vault home">
+          <img class="site-logo" src="/static/img/logo.png" alt="" aria-hidden="true" width="52" height="52">
+          Ru's Art Vault
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto nav-actions" role="menubar">
+            <li class="nav-item" role="none"><a class="nav-link" href="/gallery" role="menuitem">Gallery</a></li>
+            <li class="nav-item" role="none"><a class="nav-link" href="/feedback" role="menuitem">Feedback</a></li>
+            <li class="nav-item" role="none"><a class="game-nav-toggle" href="/games/" role="menuitem">Art Games</a></li>
+            <li class="nav-item" role="none"><a class="nav-link" href="/about" role="menuitem">About</a></li>
+            
+            <li class="nav-item" role="none"><button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode">Theme</button></li>
+            
+              <li class="nav-item" role="none"><a class="btn btn-outline-dark btn-sm" href="/login" role="menuitem">Login</a></li>
+              <li class="nav-item" role="none"><a class="btn btn-dark btn-sm" href="/signup" role="menuitem">Sign up</a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <!-- Breadcrumb block — override in child templates as needed -->
+    
+<nav class="container breadcrumbs" aria-label="Breadcrumb">
+  <a href="/">Home</a><span class="sep" aria-hidden="true">/</span><a href="/games/">Art Games</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Art Puzzle</span>
+</nav>
+
+
+    <!-- Legacy flash messages (still rendered for server-rendered pages; JS toasts handle AJAX) -->
+    
+      
+    
+    
+<section class="container py-5 game-page" data-game="puzzle">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Pastel art arcade</p>
+      <h1>Art Puzzle</h1>
+      <p class="lead">Rearrange pastel artwork tiles into a complete image.</p>
+    </div>
+    <div class="game-actions">
+      <a class="btn btn-outline-dark" href="/games/">All games</a>
+      <button class="btn btn-outline-dark" id="saveGame" type="button">Download</button>
+      
+        <a class="btn btn-dark" href="/login">Login to save</a>
+      
+      <button class="btn btn-outline-dark share-page" type="button">Share game</button>
+      <button class="btn btn-outline-dark" id="clearGame" type="button">Clear</button>
+    </div>
+  </div>
+
+  <div class="game-stage single-game-stage">
+    <div class="game-toolbar">
+      <div>
+        <label for="gameColor">Color</label>
+        <input id="gameColor" type="color" value="#d96fa8">
+      </div>
+      <div>
+        <label for="brushSize">Brush</label>
+        <input id="brushSize" type="range" min="4" max="42" value="18">
+      </div>
+      <div>
+        <label for="brushTool">Tool</label>
+        <select id="brushTool" class="form-select">
+          <option value="round">Round brush</option>
+          <option value="spray">Spray brush</option>
+          <option value="square">Square brush</option>
+          <option value="ribbon">Ribbon brush</option>
+          <option value="eraser">Eraser</option>
+        </select>
+      </div>
+      <p id="gameHint"></p>
+      <p id="gameStatus"></p>
+    </div>
+    <canvas id="artGame" width="1200" height="680"></canvas>
+  </div>
+</section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <div>
+        <a class="footer-brand" href="/" aria-label="Ru's Art Vault home">
+          <img class="site-logo" src="/static/img/logo.png" alt="" aria-hidden="true" width="52" height="52">
+          Ru's Art Vault
+        </a>
+        <p>Curated pastel artwork, creative games, and digital art experiences.</p>
+        <a href="mailto:info@rusartvault.com">info@rusartvault.com</a>
+      </div>
+      <nav aria-label="Company links">
+        <h2>Our Company</h2>
+        <a href="/about">About Us</a>
+        <a href="/about#blog">Blog</a>
+        <a href="/feedback">Contact Us</a>
+      </nav>
+      <nav aria-label="Explore links">
+        <h2>Explore</h2>
+        <a href="/gallery">Gallery</a>
+        <a href="/games/">Art Games</a>
+        <a href="/feedback">Feedback</a>
+      </nav>
+      <nav aria-label="Social media links" class="footer-social">
+        <h2>Connect</h2>
+        <a href="https://www.instagram.com/irubyy_/" target="_blank" rel="noopener noreferrer" class="social-link social-instagram" aria-label="Instagram @irubyy_">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="18" height="18">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+          <span>@irubyy_</span>
+        </a>
+        <a href="https://www.linkedin.com/in/shaikrubina1414/" target="_blank" rel="noopener noreferrer" class="social-link social-linkedin" aria-label="LinkedIn - Shaik Rubina">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="18" height="18">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <line x1="8" y1="11" x2="8" y2="17"/>
+            <line x1="12" y1="11" x2="12" y2="17"/>
+            <line x1="8" y1="7.5" x2="8.01" y2="7.5"/>
+            <path d="M12 7.5a2.5 2.5 0 0 1 5 0V17"/>
+          </svg>
+          <span>Shaik Rubina</span>
+        </a>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p class="copyright">&copy; 2026 Ru's Art Vault. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Riri Chatbot -->
+  <aside class="chatbot" id="chatbot" aria-label="Riri chatbot assistant">
+    <button class="chatbot-toggle" type="button" aria-label="Open Riri chatbot" aria-expanded="false">
+      <img src="/static/img/riri.png" alt="Riri avatar" width="64" height="64">
+    </button>
+    <div class="chatbot-panel" role="dialog" aria-label="Chat with Riri">
+      <div class="chatbot-head">
+        <img src="/static/img/riri.png" alt="Riri avatar" width="54" height="54">
+        <div>
+          <strong>Riri</strong>
+          <span>Pastel art guide</span>
+        </div>
+      </div>
+      <div class="chatbot-log" id="chatLog" role="log" aria-live="polite">
+        <p><b>Riri:</b> Hi, welcome to Ru's Art Vault. I am Riri, your pastel art friend. What would you like to explore today?</p>
+      </div>
+      <form id="chatForm" aria-label="Chat with Riri">
+        <label for="chatInput" class="sr-only">Ask Riri a question</label>
+        <input id="chatInput" type="text" placeholder="Ask Riri about artworks..." autocomplete="off">
+        <button type="submit" aria-label="Send message">Send</button>
+      </form>
+    </div>
+  </aside>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="/static/js/main.js" defer></script>
+  
+</body>
+</html>

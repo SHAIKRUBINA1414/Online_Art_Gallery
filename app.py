@@ -359,7 +359,7 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/games")
+@app.route("/games/")
 def games():
     game_cards = [
         ("splash", "Color Splash", "Click or drag colorful splashes with random pastel energy."),
@@ -432,7 +432,7 @@ def save_game_art():
     return jsonify({"ok": True, "url": url_for("artwork_detail", artwork_id=artwork.id)})
 
 
-@app.route("/admin")
+@app.route("/admin/")
 @login_required
 @admin_required
 def admin_dashboard():

@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+instance/
+art_gallery.db
+static/uploads/*
+!static/uploads/.gitkeep
+static/resume.pdf
+.env

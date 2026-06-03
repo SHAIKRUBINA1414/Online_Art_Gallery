@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}Admin | Ru's Art Vault{% endblock %}
+{% block breadcrumbs %}
+<nav class="container breadcrumbs" aria-label="Breadcrumb">
+  <a href="{{ url_for('index') }}">Home</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Admin</span>
+</nav>
+{% endblock %}
+{% block content %}
+<section class="container py-5">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Admin dashboard</p>
+      <h1>Manage gallery</h1>
+    </div>
+    <a class="btn btn-dark" href="{{ url_for('new_artwork') }}">Upload artwork</a>
+  </div>
+
+  <div class="analytics-grid">
+    <div class="panel">
+      <h2>Most viewed</h2>
+      {% for art in most_viewed %}
+        <p>{{ art.title }} <span>{{ art.views }} views</span></p>
+      {% else %}
+        <p>No data yet.</p>
+      {% endfor %}
+    </div>
+    <div class="panel">
+      <h2>Highest rated</h2>
+      {% for art in highest_rated %}
+        <p>{{ art.title }} <span>{{ art.average_rating }} ★</span></p>
+      {% else %}
+        <p>No ratings yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="admin-section">
+    <h2>Artworks</h2>
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <tr><th>Title</th><th>Category</th><th>Rating</th><th>Views</th><th></th></tr>
+        {% for art in artworks %}
+          <tr>
+            <td>{{ art.title }}</td>
+            <td>{{ art.category }}</td>
+            <td>{{ art.average_rating }} ★</td>
+            <td>{{ art.views }}</td>
+            <td>
+              <form method="post" action="{{ url_for('delete_artwork', artwork_id=art.id) }}">
+                <button class="btn btn-sm btn-outline-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+
+  <div class="admin-section">
+    <h2>Feedback moderation</h2>
+    {% for item in feedback_items %}
+      <div class="moderation-row">
+        <p><strong>{{ item.name }}</strong>: {{ item.comment }}</p>
+        <div>
+          {% if not item.approved %}
+            <form method="post" action="{{ url_for('approve_feedback', feedback_id=item.id) }}"><button class="btn btn-sm btn-success">Approve</button></form>
+          {% endif %}
+          <form method="post" action="{{ url_for('delete_feedback', feedback_id=item.id) }}"><button class="btn btn-sm btn-outline-danger">Delete</button></form>
+        </div>
+      </div>
+    {% else %}
+      <div class="empty-state">No feedback yet.</div>
+    {% endfor %}
+  </div>
+
+  <div class="admin-section">
+    <h2>Users</h2>
+    {% for user in users %}
+      <div class="moderation-row">
+        <p>{{ user.username }} <span>{{ "Admin" if user.is_admin else "Visitor" }}</span></p>
+        {% if user.id != current_user.id %}
+          <form method="post" action="{{ url_for('delete_user', user_id=user.id) }}"><button class="btn btn-sm btn-outline-danger">Delete</button></form>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="admin-section share-card">
+    <h2>Share Dashboard</h2>
+    <p>Share this admin page link for project review or local demonstration.</p>
+    <div class="share-actions">
+      <button class="btn btn-sm btn-dark share-page" type="button">Share</button>
+      <button class="btn btn-sm btn-outline-dark copy-link" type="button">Copy link</button>
+    </div>
+  </div>
+</section>
+{% endblock %}

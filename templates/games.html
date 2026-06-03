@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Mini Art Games | Ru's Art Vault{% endblock %}
+{% block breadcrumbs %}
+<nav class="container breadcrumbs" aria-label="Breadcrumb">
+  <a href="{{ url_for('index') }}">Home</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Art Games</span>
+</nav>
+{% endblock %}
+{% block content %}
+<section class="container py-5">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Creative mini games</p>
+      <h1>Pastel art arcade</h1>
+      <p class="lead">Each game opens on its own page, so visitors can focus, play, save, and build a small digital art collection.</p>
+    </div>
+  </div>
+
+  <div class="game-card-grid">
+    {% for key, title, summary in game_cards %}
+      <a class="game-card-link" href="{{ url_for('game_detail', game_key=key) }}">
+        <strong>{{ title }}</strong>
+        <span>{{ summary }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

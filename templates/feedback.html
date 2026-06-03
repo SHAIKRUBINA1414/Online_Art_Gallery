@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Feedback | Ru's Art Vault{% endblock %}
+{% block breadcrumbs %}
+<nav class="container breadcrumbs" aria-label="Breadcrumb">
+  <a href="{{ url_for('index') }}">Home</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Feedback</span>
+</nav>
+{% endblock %}
+{% block content %}
+<section class="container py-5">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Feedback wall</p>
+      <h1>Leave a comment</h1>
+    </div>
+  </div>
+  <div class="feedback-layout">
+    <form class="panel" method="post">
+      <label>Name<input class="form-control" name="name" value="{{ current_user.username if current_user.is_authenticated else '' }}" required></label>
+      <label>Artwork
+        <select class="form-select" name="artwork_id">
+          <option value="">General gallery feedback</option>
+          {% for art in artworks %}
+            <option value="{{ art.id }}">{{ art.title }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>Comment<textarea class="form-control" name="comment" rows="5" required></textarea></label>
+      <button class="btn btn-dark" type="submit">Submit for approval</button>
+      <p class="approval-notice">📝 All feedback is reviewed by an admin before being displayed.</p>
+    </form>
+    <div class="feedback-wall">
+      {% for item in comments %}
+        <div class="feedback-note">
+          <div class="feedback-note-header">
+            <div>
+              <strong>{{ item.name }}</strong>
+              {% if item.artwork %}<span class="feedback-artwork">on <em>{{ item.artwork.title }}</em></span>{% endif %}
+            </div>
+            {% if current_user.is_authenticated and current_user.is_admin %}
+              <form method="post" action="{{ url_for('delete_feedback', feedback_id=item.id) }}" class="feedback-delete-form" onsubmit="return confirm('Delete this feedback permanently?');">
+                <button class="btn btn-sm btn-outline-danger" title="Delete feedback">✕</button>
+              </form>
+            {% endif %}
+          </div>
+          <p>{{ item.comment }}</p>
+        </div>
+      {% else %}
+        <div class="empty-state">Approved feedback will appear here.</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

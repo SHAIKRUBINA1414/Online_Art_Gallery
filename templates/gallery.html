@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Gallery | Ru's Art Vault{% endblock %}
+{% block breadcrumbs %}
+<nav class="container breadcrumbs" aria-label="Breadcrumb">
+  <a href="{{ url_for('index') }}">Home</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Gallery</span>
+</nav>
+{% endblock %}
+{% block content %}
+<section class="container py-5">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Dynamic gallery</p>
+      <h1>Artwork collection</h1>
+      <p class="lead">Filter your collection like an online art marketplace: style, subject, room mood, and creative medium.</p>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <a class="chip {{ 'active' if active_category == 'all' else '' }}" href="{{ url_for('gallery') }}">All</a>
+    <a class="chip" href="{{ url_for('gallery', category='abstract') }}">Abstract</a>
+    <a class="chip" href="{{ url_for('gallery', category='traditional') }}">Traditional</a>
+    <a class="chip" href="{{ url_for('gallery', category='folk') }}">Folk</a>
+    <a class="chip" href="{{ url_for('gallery', category='flower') }}">Flower</a>
+    <a class="chip" href="{{ url_for('gallery', category='landscape') }}">Landscape</a>
+    {% for category in categories %}
+      <a class="chip {{ 'active' if active_category == category else '' }}" href="{{ url_for('gallery', category=category) }}">{{ category|title }}</a>
+    {% endfor %}
+  </div>
+  <div class="art-grid">
+    {% for art in artworks %}
+      {% include "_art_card.html" %}
+    {% else %}
+      <div class="empty-state">No artworks found in this category.</div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

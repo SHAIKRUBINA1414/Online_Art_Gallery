@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}{{ game_title }} | Ru's Art Vault{% endblock %}
+{% block breadcrumbs %}
+<nav class="container breadcrumbs" aria-label="Breadcrumb">
+  <a href="{{ url_for('index') }}">Home</a><span class="sep" aria-hidden="true">/</span><a href="{{ url_for('games') }}">Art Games</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">{{ game_title }}</span>
+</nav>
+{% endblock %}
+{% block content %}
+<section class="container py-5 game-page" data-game="{{ game_key }}">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Pastel art arcade</p>
+      <h1>{{ game_title }}</h1>
+      <p class="lead">{{ game_summary }}</p>
+    </div>
+    <div class="game-actions">
+      <a class="btn btn-outline-dark" href="{{ url_for('games') }}">All games</a>
+      <button class="btn btn-outline-dark" id="saveGame" type="button">Download</button>
+      {% if current_user.is_authenticated %}
+        <button class="btn btn-dark" id="saveToVault" type="button">Save to gallery</button>
+      {% else %}
+        <a class="btn btn-dark" href="{{ url_for('login') }}">Login to save</a>
+      {% endif %}
+      <button class="btn btn-outline-dark share-page" type="button">Share game</button>
+      <button class="btn btn-outline-dark" id="clearGame" type="button">Clear</button>
+    </div>
+  </div>
+
+  <div class="game-stage single-game-stage">
+    <div class="game-toolbar">
+      <div>
+        <label for="gameColor">Color</label>
+        <input id="gameColor" type="color" value="#d96fa8">
+      </div>
+      <div>
+        <label for="brushSize">Brush</label>
+        <input id="brushSize" type="range" min="4" max="42" value="18">
+      </div>
+      <div>
+        <label for="brushTool">Tool</label>
+        <select id="brushTool" class="form-select">
+          <option value="round">Round brush</option>
+          <option value="spray">Spray brush</option>
+          <option value="square">Square brush</option>
+          <option value="ribbon">Ribbon brush</option>
+          <option value="eraser">Eraser</option>
+        </select>
+      </div>
+      <p id="gameHint"></p>
+      <p id="gameStatus"></p>
+    </div>
+    <canvas id="artGame" width="1200" height="680"></canvas>
+  </div>
+</section>
+{% endblock %}

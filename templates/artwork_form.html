@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Upload Artwork | Ru's Art Vault{% endblock %}
+{% block breadcrumbs %}
+<nav class="container breadcrumbs" aria-label="Breadcrumb">
+  <a href="{{ url_for('index') }}">Home</a><span class="sep" aria-hidden="true">/</span><a href="{{ url_for('admin_dashboard') }}">Admin</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Upload Artwork</span>
+</nav>
+{% endblock %}
+{% block content %}
+<section class="auth-shell">
+  <form class="auth-card wide" method="post" enctype="multipart/form-data">
+    <h1>Upload artwork</h1>
+    <label>Title<input class="form-control" name="title" required></label>
+    <label>Category<input class="form-control" name="category" placeholder="painting, digital, sketch" required></label>
+    <label>Medium<input class="form-control" name="medium" placeholder="Acrylic, oil, watercolor, digital" required></label>
+    <label>Size<input class="form-control" name="size" placeholder="24 x 18 inches" required></label>
+    <label>Price<input class="form-control" name="price" placeholder="₹12,000 or On request" required></label>
+    <label>Description<textarea class="form-control" name="description" rows="5" required></textarea></label>
+    <label>Image<input class="form-control" type="file" name="image" accept="image/*" required></label>
+    <button class="btn btn-dark w-100" type="submit">Save artwork</button>
+  </form>
+</section>
+{% endblock %}

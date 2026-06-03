@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Home | Ru's Art Vault{% endblock %}
+{% block breadcrumbs %}
+<nav class="container breadcrumbs" aria-label="Breadcrumb">
+  <a href="{{ url_for('index') }}">Home</a>
+</nav>
+{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <div>
+      <p class="eyebrow">Online Art Gallery</p>
+      <h2>A Person should hear a little music, read a little poetry, and see a fine picture every day of his life.</h2>
+      <p class="lead">Hey, I’m Shaik Rubina — the artist behind Ru’s Art Vault 🎨✨.</p>
+      <a class="btn btn-dark btn-lg" href="{{ url_for('gallery') }}">Explore Aesthetics</a>
+    </div>
+  </div>
+</section>
+
+<section class="container py-5">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Navigate Ru's Art Vault</p>
+      <h2>Choose where to go</h2>
+    </div>
+  </div>
+  <div class="home-nav-grid">
+    <a class="home-nav-card gallery-card" href="{{ url_for('gallery') }}">
+      <span>01</span>
+      <strong>Gallery</strong>
+      <p>Browse paintings, digital art, folk-inspired works, ratings, hearts, and artwork details.</p>
+    </a>
+    <a class="home-nav-card feedback-card" href="{{ url_for('feedback') }}">
+      <span>02</span>
+      <strong>Feedback</strong>
+      <p>Leave comments, share impressions, and view approved visitor notes on the feedback wall.</p>
+    </a>
+    <a class="home-nav-card games-card" href="{{ url_for('games') }}">
+      <span>03</span>
+      <strong>Art Games</strong>
+      <p>Play pastel mini games, draw with brushes, solve puzzles, and save your art to the gallery.</p>
+    </a>
+    <a class="home-nav-card about-card" href="{{ url_for('about') }}">
+      <span>04</span>
+      <strong>About</strong>
+      <p>Explore the artist profile, journey, achievements, certifications, blog, and contact details.</p>
+    </a>
+  </div>
+</section>
+
+<section class="showroom">
+  <div class="container showroom-grid">
+    <div>
+      <p class="eyebrow">3D Showcase Art</p>
+      <h2>My favorite Picks</h2>
+      <p>Art is not a handicraft, it is the transmission of feelings the artist has experienced.</p>
+      <h6>— Leo Tolstoy</h6>
+    </div>
+    <div class="carousel-3d" aria-label="Moving artwork frames">
+      <img class="frame-3d frame-a" src="{{ url_for('static', filename='img/showcase1.png') }}" alt="Vision Board Canvas — inspiration art" loading="lazy">
+      <img class="frame-3d frame-b" src="{{ url_for('static', filename='img/showcase3.png') }}" alt="Flowing Dream Abstraction — abstract art" loading="lazy">
+      <img class="frame-3d frame-c" src="{{ url_for('static', filename='img/showcase2.png') }}" alt="Studio Window Rhythm — traditional art" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="container py-5">
+  <div class="section-heading">
+    <h2>Featured artworks</h2>
+    <a href="{{ url_for('gallery') }}">View all</a>
+  </div>
+  <div class="art-grid">
+    {% for art in featured %}
+      {% include "_art_card.html" %}
+    {% else %}
+      <div class="empty-state">No artworks yet. Log in as admin and upload your first piece.</div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="container pb-5">
+  <div class="share-card page-end-share">
+    <h2>Share Ru's Art Vault</h2>
+    <p>Invite others to explore the gallery, play art games, and save their own digital artworks.</p>
+    <div class="share-actions">
+      <button class="btn btn-sm btn-dark share-page" type="button">Share</button>
+      <button class="btn btn-sm btn-outline-dark copy-link" type="button">Copy link</button>
+    </div>
+  </div>
+</section>
+{% endblock %}

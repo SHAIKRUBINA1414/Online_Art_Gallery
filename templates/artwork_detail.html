@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}{{ artwork.title }} | Ru's Art Vault{% endblock %}
+{% block breadcrumbs %}
+<nav class="container breadcrumbs" aria-label="Breadcrumb">
+  <a href="{{ url_for('index') }}">Home</a><span class="sep" aria-hidden="true">/</span><a href="{{ url_for('gallery') }}">Gallery</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">{{ artwork.title }}</span>
+</nav>
+{% endblock %}
+{% block content %}
+<section class="container py-5">
+  <div class="detail-layout">
+    <img class="detail-image" src="{{ url_for('static', filename='uploads/' ~ artwork.image_filename) }}" alt="{{ artwork.title }}">
+    <div class="detail-panel">
+      <p class="eyebrow">{{ artwork.category }}</p>
+      <h1>{{ artwork.title }}</h1>
+      <p>{{ artwork.description }}</p>
+      <div class="stats-row">
+        <span>{{ artwork.likes|length }} hearts</span>
+        <span>{{ artwork.views }} views</span>
+      </div>
+      <div class="art-meta">
+        <span>Medium: {{ artwork.medium }}</span>
+        <span>Size: {{ artwork.size }}</span>
+        <span>Price: {{ artwork.price }}</span>
+      </div>
+      {% if current_user.is_authenticated %}
+        <form method="post" action="{{ url_for('like_artwork', artwork_id=artwork.id) }}" class="mb-3">
+          <button class="heart-only" type="submit" aria-label="Like artwork">♥</button>
+        </form>
+      {% endif %}
+      <div class="share-card" data-share-title="{{ artwork.title }}">
+        <strong>Share this artwork</strong>
+        <div class="share-actions">
+          <button class="btn btn-sm btn-dark share-page" type="button">Share</button>
+          <button class="btn btn-sm btn-outline-dark copy-link" type="button">Copy link</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <h2>Leave a comment</h2>
+    <form class="panel" method="post" action="{{ url_for('feedback') }}">
+      <input type="hidden" name="artwork_id" value="{{ artwork.id }}">
+      <label>Name<input class="form-control" name="name" value="{{ current_user.username if current_user.is_authenticated else '' }}" required></label>
+      <label>Comment<textarea class="form-control" name="comment" rows="3" required></textarea></label>
+      <button class="btn btn-dark" type="submit">Submit for approval</button>
+      <p class="approval-notice">📝 All comments are reviewed by an admin before being displayed.</p>
+    </form>
+  </div>
+
+  <div class="mt-5">
+    <h2>Approved comments</h2>
+    <div class="feedback-wall">
+      {% for item in feedback %}
+        <div class="feedback-note">
+          <strong>{{ item.name }}</strong>
+          <p>{{ item.comment }}</p>
+        </div>
+      {% else %}
+        <div class="empty-state">No approved comments yet. Be the first to leave one!</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

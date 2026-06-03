@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Login | Ru's Art Vault{% endblock %}
+{% block breadcrumbs %}
+<nav class="container breadcrumbs" aria-label="Breadcrumb">
+  <a href="{{ url_for('index') }}">Home</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Login</span>
+</nav>
+{% endblock %}
+{% block content %}
+<section class="auth-shell">
+  <form class="auth-card" method="post">
+    <h1>Login</h1>
+    <label>Username or email<input class="form-control" name="username" required></label>
+    <label>Password<input class="form-control" type="password" name="password" required></label>
+    <button class="btn btn-dark w-100" type="submit">Login</button>
+    <p>New here? <a href="{{ url_for('signup') }}">Create an account</a></p>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}About | Ru's Art Vault{% endblock %}
+{% block breadcrumbs %}
+<nav class="container breadcrumbs" aria-label="Breadcrumb">
+  <a href="{{ url_for('index') }}">Home</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">About</span>
+</nav>
+{% endblock %}
+{% block content %}
+<section class="container py-5">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Artist profile</p>
+      <h1>About me</h1>
+    </div>
+  </div>
+
+  <!-- ── Direct Page Scroll Grid ── -->
+  <div class="about-grid">
+    <article class="about-card-item about-card-bio">
+      <div class="about-card-icon">&#127912;</div>
+      <h2>Creator</h2>
+      <p>Hey there! I'm Shaik Rubina, an Engineering Student by Degree and Artist by Passion.Crazy how no one understands me better than my art, Join me in my creative journey!</p>
+    </article>
+
+    <article class="about-card-item about-card-journey">
+      <div class="about-card-icon">&#127744;</div>
+      <h2>Creative Journey</h2>
+      <p>I create visual stories through color, texture, memory, and experimentation. Ru's Art Vault collects my artwork, digital studies, and creative interactive pieces.All I need from You is Support and Admiration! </p>
+    </article>
+
+    <article class="about-card-item about-card-achievements">
+      <div class="about-card-icon">&#127942;</div>
+      <h2>Achievements</h2>
+      <p>Presented selected artwork in student showcases, personal collections, and creative web exhibitions.</p>
+    </article>
+
+    <article class="about-card-item about-card-certifications">
+      <div class="about-card-icon">&#127891;</div>
+      <h2>Certifications</h2>
+      <p>Design fundamentals, digital illustration, color theory, and creative portfolio development.</p>
+      <div class="cert-badge">
+        <a href="https://www.coursera.org/account/accomplishments/certificate/8NZGYN0766K5" target="_blank" rel="noopener noreferrer" class="cert-link">
+          <span class="cert-icon">🎓</span>
+          <span class="cert-title">View Coursera Certificate</span>
+          <span class="cert-id">Credential ID: 8NZGYN0766K5</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="about-card-item about-card-timeline about-card-wide">
+      <div class="about-card-icon">&#9203;</div>
+      <h2>Timeline</h2>
+      <div class="timeline">
+        <div><span>2016</span><p>My artistic journey began in grade six, when I discovered a natural precision for sketching biological figures; each drawing rendered with remarkable accuracy and detail.</p></div>
+        <div><span>2019</span><p>I started using pencil art then moved on to paints , pastels, ink and abstract work</p></div>
+        <div><span>2020</span><p>Created  an official instagram account and presented art aesthetics and collaborated with many artists worldwide.</p></div>
+        <div><span>Now</span><p>Expanding the portfolio with mixed media, feedbacks, and commissioned work and supportive team.</p></div>
+      </div>
+    </article>
+
+    <article class="about-card-item about-card-blog">
+      <div class="about-card-icon">&#128221;</div>
+      <h2>Blog</h2>
+      <p>Coming soon: color studies, behind-the-scenes painting notes, and digital art process posts.</p>
+    </article>
+
+    <article class="about-card-item about-card-contact">
+      <div class="about-card-icon">&#128231;</div>
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:info@rusartvault.com">info@rusartvault.com</a></p>
+    </article>
+  </div>
+</section>
+{% endblock %}

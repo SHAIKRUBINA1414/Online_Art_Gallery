@@ -8,7 +8,7 @@ A full-stack Python art gallery app with user login, artwork uploads, ratings, h
 2. Choose **File > Open Folder**.
 3. Select this folder:
 
-   `C:\Users\shaik\OneDrive\Desktop\ART_GALLERY`
+    Select this repository folder on your machine (the project root).
 
 ## Setup
 
@@ -21,14 +21,10 @@ pip install -r requirements.txt
 flask --app app init-db
 ```
 
-The database command creates the tables and an admin account:
+The database command creates the tables and an initial admin account for convenience.
+Run `flask --app app init-db` and then immediately log in and change the admin password to a secure value.
 
-```text
-username: admin
-password: admin123
-```
-
-For local testing, if signup says an account already exists, submit the signup form again with the password you want. The app will refresh that existing account password and sign you in.
+For local testing, if signup reports an account already exists, sign in and use the admin dashboard to manage users or reset passwords securely.
 
 ## Run
 
